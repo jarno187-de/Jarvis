@@ -1,7 +1,7 @@
 // Public model metadata is derived from server-side configuration. Never expose keys.
 const specs = [
   {provider:'gemini',name:'Gemini',key:'GEMINI_API_KEY',model:'GEMINI_MODEL',fallback:'gemini-2.5-flash',limit:'GEMINI_RPD_LIMIT',color:'#8C8BFF',info:'Google Gemini · Cloud-Modell'},
-  {provider:'groq',name:'Groq',key:'GROQ_API_KEY',model:'GROQ_MODEL',fallback:'llama-3.3-70b-versatile',limit:'GROQ_RPD_LIMIT',color:'#F28A60',info:'Groq Cloud · Modell laut Konfiguration'}
+  {provider:'groq',name:'Groq',key:'GROQ_API_KEY',model:'GROQ_MODEL',fallback:'openai/gpt-oss-120b',limit:'GROQ_RPD_LIMIT',color:'#F28A60',info:'Groq Cloud · Modell laut Konfiguration'}
 ];
 export function availableModels(){
   return specs.filter(x=>Boolean(process.env[x.key])).map(x=>({

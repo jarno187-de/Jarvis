@@ -1,0 +1,39 @@
+/* Conversation stays inside the existing workspace, with the orb visible above it. */
+#text.history-visible{height:clamp(155px,27vh,255px);width:min(780px,calc(100% - 36px));padding:0;text-align:left;border:1px solid var(--border);border-radius:17px;background:color-mix(in srgb,var(--surface) 86%,transparent);box-shadow:0 12px 36px rgba(0,0,0,.1)}
+#text.history-visible #you,#text.history-visible #reply{display:none}
+#conversation[hidden]{display:none}
+#conversation{height:100%;overflow-y:auto;padding:15px 18px;display:flex;flex-direction:column;gap:13px;scrollbar-width:thin}
+.chat-message{max-width:88%;padding:11px 14px;border:1px solid var(--border);border-radius:13px;background:var(--surface-2);line-height:1.5;font-size:14px;overflow-wrap:anywhere}
+.chat-message.user{align-self:flex-end;background:color-mix(in srgb,var(--accent) 12%,var(--surface));border-color:color-mix(in srgb,var(--accent) 22%,var(--border))}
+.chat-message.assistant{align-self:flex-start}
+.chat-message-head{display:block;font-size:10px;font-weight:700;letter-spacing:.075em;color:var(--accent-text);margin-bottom:5px}
+.chat-message.user .chat-message-head{color:var(--muted)}
+.chat-message-body{white-space:pre-wrap}
+.chat-empty{margin:auto;text-align:center;color:var(--muted);font-size:13px}
+.routine-panel[hidden]{display:none}
+.routine-panel{position:fixed;z-index:7;right:clamp(18px,4.5vw,72px);top:72px;width:min(420px,calc(100vw - 36px));max-height:min(560px,calc(100dvh - 95px));display:flex;flex-direction:column;border:1px solid var(--border);border-radius:18px;background:var(--bg-raised);box-shadow:var(--shadow);animation:routineEnter .28s cubic-bezier(.16,1,.3,1)}
+.routine-panel-head{display:flex;align-items:center;justify-content:space-between;padding:20px 21px 14px;border-bottom:1px solid var(--border)}
+.routine-panel-head h2{font-size:20px;font-weight:500;margin:4px 0 0}
+.routine-results{padding:15px;overflow:auto;display:grid;gap:10px;scrollbar-width:thin}
+.routine-result{padding:14px;border:1px solid var(--border);border-radius:13px;background:var(--surface);font-size:13px;line-height:1.55}
+.routine-result strong{display:block;color:var(--text);font-size:13px;margin-bottom:2px}
+.routine-result time{display:block;color:var(--subtle);font-size:11px;margin-bottom:8px}
+.routine-result p{margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
+.routine-results>p{color:var(--muted);font-size:13px;margin:10px}
+.model-summon{position:fixed;inset:0;z-index:8;pointer-events:none;opacity:0;visibility:hidden;overflow:hidden;--summon-color:var(--accent);background:radial-gradient(ellipse 58% 52% at 50% 54%,color-mix(in srgb,var(--summon-color) 9%,transparent),transparent 74%)}
+.model-summon.active{visibility:visible;animation:summonVeil 1.55s ease-in-out forwards}
+.summon-halo{position:absolute;left:50%;top:52%;width:min(88vw,720px);aspect-ratio:1;border:1px solid color-mix(in srgb,var(--summon-color) 26%,transparent);border-radius:50%;transform:translate(-50%,-50%) scale(.54);opacity:0;box-shadow:0 0 90px color-mix(in srgb,var(--summon-color) 13%,transparent),inset 0 0 110px color-mix(in srgb,var(--summon-color) 8%,transparent)}
+.model-summon.active .summon-halo{animation:summonHalo 1.55s cubic-bezier(.16,1,.3,1) forwards}
+.summon-core{position:absolute;left:50%;top:47%;transform:translate(-50%,-39%);text-align:center;min-width:min(320px,86vw);padding:18px 28px 20px;border:1px solid color-mix(in srgb,var(--summon-color) 32%,var(--border));border-radius:18px;background:color-mix(in srgb,var(--bg-raised) 85%,transparent);backdrop-filter:blur(16px);box-shadow:0 20px 70px rgba(0,0,0,.16),0 0 45px color-mix(in srgb,var(--summon-color) 12%,transparent);opacity:0}
+.model-summon.active .summon-core{animation:summonLabel 1.55s ease-in-out forwards}
+.summon-core span{display:block;font-size:10px;font-weight:700;letter-spacing:.28em;color:var(--summon-color)}
+.summon-core strong{display:block;font-size:clamp(24px,4vw,45px);font-weight:400;letter-spacing:-.04em;color:var(--text);margin-top:8px;text-shadow:0 0 24px color-mix(in srgb,var(--summon-color) 38%,transparent)}
+/* The earlier bright composer pulse is replaced by the page-wide transition. */
+#composer.summoning,#composer.summoning .model-orbit{animation:none;filter:none}
+#composer.summoning::after,body.model-summoning #stage::after{content:none}
+@keyframes routineEnter{from{opacity:0;transform:translateY(-9px) scale(.98)}to{opacity:1;transform:none}}
+@keyframes summonVeil{0%{opacity:0}28%{opacity:1}65%{opacity:1}100%{opacity:0}}
+@keyframes summonHalo{0%{opacity:0;transform:translate(-50%,-50%) scale(.54)}32%{opacity:.75}100%{opacity:0;transform:translate(-50%,-50%) scale(1.18)}}
+@keyframes summonLabel{0%{opacity:0;transform:translate(-50%,-39%)}30%{opacity:1;transform:translate(-50%,-50%)}68%{opacity:1}100%{opacity:0;transform:translate(-50%,-55%)}}
+@media(max-width:680px){#text.history-visible{height:clamp(150px,25vh,210px)}#conversation{padding:12px}.chat-message{max-width:94%;font-size:13px}.routine-panel{top:63px}}
+@media(prefers-reduced-motion:reduce){.model-summon.active,.model-summon.active .summon-halo,.model-summon.active .summon-core,.routine-panel{animation:none!important}.model-summon.active{opacity:.75}.model-summon.active .summon-core{opacity:1;transform:translate(-50%,-50%)}}
