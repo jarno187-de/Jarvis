@@ -1,5 +1,11 @@
 # Jarvis
 
+## KI-Modell im Chat wechseln
+
+Der Modellwähler sitzt links im unteren Eingabefeld. Er zeigt nur Anbieter mit einem serverseitig eingetragenen API-Key. Für Groq können `GROQ_API_KEY` und `GROQ_MODEL` in `.env` gesetzt werden; Gemini verwendet `GEMINI_API_KEY` und `GEMINI_MODEL`. Danach Jarvis neu starten. Der ausgewählte Anbieter wird pro Browser gespeichert und für Chat und delegierte Agentenantworten verwendet. Routinen und Briefings verwenden weiterhin das erste konfigurierte Modell.
+
+Das Info-Symbol nennt die genaue Modell-ID und das **gesamte** Tageskontingent. Trage dafür, falls bekannt, `GEMINI_RPD_LIMIT` beziehungsweise `GROQ_RPD_LIMIT` als vereinbarte Anfragen pro Tag in `.env` ein. Ohne Eintrag steht dort „Nicht hinterlegt“; es werden keine verbleibenden Anfragen oder geratenen Kontolimits angezeigt. Die tatsächlichen Limits können sich beim Anbieter ändern.
+
 Die gelieferte Orb-Oberfläche ist mit einem Node-Backend verbunden. Jarvis nutzt ein entferntes Gemini-Modell, ElevenLabs für Sprachausgabe und optional Playwright- und Buffer-MCP-Server. Agenten, Routinen, Freigaben und Briefing-Einstellungen liegen in `data/state.json`.
 
 ## Start

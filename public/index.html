@@ -10,6 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/model-selector.css">
 </head>
 <body data-s="idle" data-theme="dark">
 <div id="app">
@@ -31,7 +32,7 @@
     <div class="workspace-heading"><span class="eyebrow"><span class="eyebrow-line"></span> DEIN ASSISTENT</span><h1>Was kann ich für dich tun?</h1><p>Frag mich, plane deinen Tag oder lass eine Aufgabe erledigen.</p></div>
     <div id="stage"><div class="stage-grid" aria-hidden="true"></div><canvas id="orb" aria-label="Jarvis aktivieren" role="button" tabindex="0"></canvas><span class="stage-hint">TIPPEN, UM ZU SPRECHEN</span></div>
     <div id="text" aria-live="polite"><div id="you"></div><div id="reply"></div></div>
-    <div class="input-area"><div id="composer"><input id="q" type="text" autocomplete="off" placeholder="Frag Jarvis etwas ..." aria-label="Nachricht"><button id="snd" class="composer-button" title="Sprachausgabe an/aus" aria-label="Sprachausgabe"><svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M17 9a4 4 0 0 1 0 6"/></svg></button><button id="mic" class="composer-button" title="Sprechen" aria-label="Spracheingabe"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button><button id="send" title="Senden" aria-label="Senden"><svg viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button></div><p class="input-hint">Tipp: Du kannst auch auf den Orb tippen oder die Leertaste drücken.</p></div>
+    <div class="input-area"><div id="composer"><div class="model-selector" id="model-selector"><button type="button" id="model-trigger" class="model-trigger" aria-label="KI-Modell auswählen" aria-haspopup="true" aria-expanded="false" aria-controls="model-menu"><span class="model-orbit" aria-hidden="true">✦</span><span id="model-current">Modell</span><span class="model-chevron" aria-hidden="true">⌃</span></button><div id="model-menu" class="model-menu" role="group" aria-label="KI-Modelle" inert><div class="model-menu-heading">ASSISTENTEN WECHSELN</div><div id="model-options"></div></div></div><input id="q" type="text" autocomplete="off" placeholder="Frag Jarvis etwas ..." aria-label="Nachricht"><button id="snd" class="composer-button" title="Sprachausgabe an/aus" aria-label="Sprachausgabe"><svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M17 9a4 4 0 0 1 0 6"/></svg></button><button id="mic" class="composer-button" title="Sprechen" aria-label="Spracheingabe"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button><button id="send" title="Senden" aria-label="Senden"><svg viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button></div><p class="input-hint">Tipp: Du kannst auch auf den Orb tippen oder die Leertaste drücken.</p></div>
   </main>
   <footer class="footer"><span>JARVIS / ASSISTANT SYSTEM</span><span>ENTWICKELT FÜR DEINEN ALLTAG</span></footer>
 </div>
@@ -52,6 +53,7 @@
     </div>
   </div>
 </div></div>
+<script src="/model-selector.js"></script>
 <script src="/app.js"></script>
 </body>
 </html>

@@ -1,0 +1,32 @@
+.model-selector{position:relative;flex:none;z-index:4;--model-color:var(--accent)}
+#composer{position:relative}
+#composer .model-trigger{width:auto;height:38px;display:flex;align-items:center;gap:7px;padding:0 10px;border:1px solid var(--border);border-radius:11px;background:var(--surface-2);color:var(--text);font-size:12px;font-weight:700;white-space:nowrap;max-width:155px}
+#model-current{overflow:hidden;text-overflow:ellipsis;max-width:85px}
+.model-orbit{color:var(--model-color);font-size:17px;line-height:1;text-shadow:0 0 12px var(--model-color)}
+.model-chevron{font-size:13px;color:var(--muted);transition:transform .25s}
+.model-selector.open .model-chevron{transform:rotate(180deg)}
+.model-menu{position:absolute;left:0;bottom:calc(100% + 15px);width:min(340px,calc(100vw - 36px));max-height:min(390px,55vh);overflow-y:auto;padding:10px;background:var(--bg-raised);border:1px solid var(--border);border-radius:18px;box-shadow:0 25px 70px rgba(0,0,0,.35),0 0 35px color-mix(in srgb,var(--model-color) 15%,transparent);opacity:0;visibility:hidden;pointer-events:none;transform:translateY(12px) scale(.96);transform-origin:bottom left;transition:opacity .24s,transform .33s cubic-bezier(.16,1,.3,1),visibility .24s;will-change:transform,opacity}
+.model-selector.open .model-menu{opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0) scale(1)}
+.model-menu-heading{font-size:9px;letter-spacing:.19em;font-weight:700;color:var(--muted);padding:9px 10px 12px}
+.model-row{display:flex;align-items:center;gap:6px;padding:4px;border-radius:12px;position:relative}
+.model-row:hover,.model-row:focus-within{background:var(--surface-2)}
+#composer .model-choice{width:auto;height:auto;min-width:0;flex:1;display:flex;align-items:center;gap:10px;padding:9px;text-align:left;border-radius:9px;color:var(--text)}
+.model-glyph{width:32px;height:32px;flex:none;display:grid;place-items:center;border-radius:10px;background:color-mix(in srgb,var(--row-color) 15%,transparent);color:var(--row-color);font-size:18px;box-shadow:inset 0 0 10px color-mix(in srgb,var(--row-color) 18%,transparent)}
+.model-name{display:block;font-size:13px;font-weight:700}.model-version{display:block;font-size:10px;color:var(--muted);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:188px}
+.model-check{margin-left:auto;color:var(--row-color);opacity:0}.model-row.selected .model-check{opacity:1}
+#composer .model-info{width:28px;height:28px;flex:none;border:1px solid var(--border);border-radius:50%;color:var(--muted);font-size:12px;font-weight:700;font-style:normal}
+#composer .model-info:hover,#composer .model-info[aria-expanded=true]{border-color:var(--row-color);color:var(--row-color)}
+.model-details{display:none;margin:0 7px 9px 55px;padding:11px 12px;border-left:2px solid var(--row-color);background:var(--surface);border-radius:0 9px 9px 0;color:var(--muted);font-size:11px;line-height:1.55;overflow-wrap:anywhere}
+.model-details.visible{display:block;animation:modelInfoIn .2s ease-out}
+.model-details strong{color:var(--text)}
+#composer.summoning{animation:composerSummon .95s ease-out;isolation:isolate;--summon:var(--model-color)}
+#composer.summoning::after{content:'';position:absolute;inset:-2px;border-radius:inherit;border:1px solid var(--summon);box-shadow:0 0 22px var(--summon),inset 0 0 15px color-mix(in srgb,var(--summon) 30%,transparent);pointer-events:none;animation:summonTrace .95s ease-out forwards}
+#composer.summoning .model-orbit{animation:orbitSummon .8s ease-out}
+body.model-summoning #stage::after{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 50% 50%,color-mix(in srgb,var(--model-color) 24%,transparent),transparent 48%);animation:stageSummon 1s ease-out forwards}
+@keyframes composerSummon{0%{filter:brightness(1)}35%{filter:brightness(1.28)}100%{filter:brightness(1)}}
+@keyframes summonTrace{0%{opacity:0;transform:scale(.98)}30%{opacity:1;transform:scale(1.01)}100%{opacity:0;transform:scale(1.035)}}
+@keyframes orbitSummon{0%{transform:rotate(-50deg) scale(.5);opacity:.3}55%{transform:rotate(190deg) scale(1.4)}100%{transform:rotate(360deg) scale(1);opacity:1}}
+@keyframes stageSummon{0%{opacity:0;transform:scale(.72)}40%{opacity:1}100%{opacity:0;transform:scale(1.25)}}
+@keyframes modelInfoIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:680px){#composer .model-trigger{padding:0 7px;gap:4px;max-width:100px}#model-current{max-width:49px}.model-menu{left:-9px}.model-chevron{display:none}}
+@media(prefers-reduced-motion:reduce){.model-menu,#composer.summoning,#composer.summoning::after,#composer.summoning .model-orbit,body.model-summoning #stage::after{animation:none!important;transition:none!important}}
