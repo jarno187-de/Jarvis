@@ -6,7 +6,7 @@ if exist ".env" for /f "usebackq tokens=1,* delims==" %%A in (".env") do if /I "
 set "JARVIS_URL=http://localhost:%JARVIS_PORT%/"
 
 if not exist "server.js" (
-  echo server.js fehlt in diesem Ordner: %CD%
+  echo server.js fehlt in diesem Ordner: "%CD%"
   pause
   exit /b 1
 )
@@ -23,7 +23,7 @@ if errorlevel 1 (
   if errorlevel 1 (
     echo Jarvis konnte nicht gestartet werden.
     echo Oeffne das minimierte CMD-Fenster "Jarvis Server" in der Taskleiste und lies den Fehler.
-    echo Ordner: %CD%
+    echo Ordner: "%CD%"
     pause
     exit /b 1
   )
