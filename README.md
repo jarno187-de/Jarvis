@@ -28,3 +28,5 @@ Unter **Einstellungen → Darstellung** kannst du Dark Mode oder Light Mode ausw
 ## Vollständige Einrichtung ohne bezahlte Tarife
 
 Die ausführliche Schritt-für-Schritt-Anleitung steht in [docs/KOSTENLOS-EINRICHTEN.md](docs/KOSTENLOS-EINRICHTEN.md). Sie nennt die Grenzen der kostenlosen Kontingente ausdrücklich.
+
+Für den vereinfachten Start **ohne Buffer und DuckDNS** siehe [docs/START-OHNE-BUFFER-UND-DUCKDNS.md](docs/START-OHNE-BUFFER-UND-DUCKDNS.md).
