@@ -30,3 +30,5 @@ Unter **Einstellungen → Darstellung** kannst du Dark Mode oder Light Mode ausw
 Die ausführliche Schritt-für-Schritt-Anleitung steht in [docs/KOSTENLOS-EINRICHTEN.md](docs/KOSTENLOS-EINRICHTEN.md). Sie nennt die Grenzen der kostenlosen Kontingente ausdrücklich.
 
 Für den vereinfachten Start **ohne Buffer und DuckDNS** siehe [docs/START-OHNE-BUFFER-UND-DUCKDNS.md](docs/START-OHNE-BUFFER-UND-DUCKDNS.md).
+
+Für den **lokalen Start auf einem schwächeren PC mit externer KI**, zunächst ohne Oracle, Buffer und DuckDNS: [docs/LOKAL-STARTEN.md](docs/LOKAL-STARTEN.md).
