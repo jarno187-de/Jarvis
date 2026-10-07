@@ -2,7 +2,7 @@
 
 ## KI-Modell im Chat wechseln
 
-Der Modellwähler sitzt links im unteren Eingabefeld. Er zeigt nur Anbieter mit einem serverseitig eingetragenen API-Key. Für Groq können `GROQ_API_KEY` und `GROQ_MODEL` in `.env` gesetzt werden; Gemini verwendet `GEMINI_API_KEY` und `GEMINI_MODEL`. Danach Jarvis neu starten. Der ausgewählte Anbieter wird pro Browser gespeichert und für Chat und delegierte Agentenantworten verwendet. Erstellte Agenten erscheinen darunter und antworten mit dem zuletzt gewählten KI-Modell. Routinen und Briefings verwenden weiterhin das erste konfigurierte Modell.
+Der Modellwähler sitzt links im unteren Eingabefeld. Er zeigt nur Anbieter mit einem serverseitig eingetragenen API-Key. Für Groq können `GROQ_API_KEY` und `GROQ_MODEL` in `.env` gesetzt werden; Gemini verwendet `GEMINI_API_KEY` und `GEMINI_MODEL`. Danach Jarvis neu starten. Im Menü wählst du ein KI-Modell und unabhängig davon einen Agenten, „Automatisch“ oder „Kein Agent“. So sind zum Beispiel „Gemini + Albert Einstein“ und „Gemini ohne Agent“ möglich. Bei automatischer Modellwahl bevorzugt Jarvis Groq für kurze Alltagsfragen und Gemini für Analyse oder Recherche, sofern beide konfiguriert sind. Die automatische Agentenwahl vergleicht Wörter aus der Anfrage mit Namen und Beschreibungen deiner Agenten; ohne klare Übereinstimmung antwortet die KI direkt. Die konkrete Auswahl steht über der Antwort im Chatverlauf. Routinen und Briefings verwenden weiterhin das erste konfigurierte Modell.
 
 Das Info-Symbol nennt die genaue Modell-ID und das **gesamte** Tageskontingent. Trage dafür, falls bekannt, `GEMINI_RPD_LIMIT` beziehungsweise `GROQ_RPD_LIMIT` als vereinbarte Anfragen pro Tag in `.env` ein. Ohne Eintrag steht dort „Nicht hinterlegt“; es werden keine verbleibenden Anfragen oder geratenen Kontolimits angezeigt. Die tatsächlichen Limits können sich beim Anbieter ändern.
 
@@ -15,9 +15,9 @@ Die gelieferte Orb-Oberfläche ist mit einem Node-Backend verbunden. Jarvis nutz
 3. `.env.example` nach `.env` kopieren und mindestens `JARVIS_PASSWORD` und `GEMINI_API_KEY` setzen. Den Gemini-Key gibt es in Google AI Studio; ob ein kostenloses Kontingent verfügbar ist, hängt vom aktuellen Tarif und Modell ab.
 4. `npm start` ausführen und `http://localhost:3000` öffnen.
 
-Unter Windows startet `start_local.bat` Jarvis im minimierten CMD-Fenster und öffnet Chrome erst, wenn der Server erreichbar ist. Falls der Start fehlschlägt, bleibt eine Meldung offen; die genaue Ursache steht im Fenster „Jarvis Server“.
+Unter Windows startet `start_local.bat` Jarvis im minimierten CMD-Fenster und öffnet den Standardbrowser, sobald der Server erreichbar ist. Wenn du Chrome nutzen möchtest, stelle Chrome als Standardbrowser ein. Falls der Start fehlschlägt, bleibt eine Meldung offen; die genaue Ursache steht im Fenster „Jarvis Server“.
 
-ElevenLabs benötigt `ELEVENLABS_API_KEY` und `ELEVENLABS_VOICE_ID`. Ohne diese Werte nutzt der Browser seine eingebaute Sprachausgabe. Die Kreispfeile oben öffnen die Ergebnisse ausgeführter Routinen. Spracheingabe nutzt die Web Speech API und benötigt einen kompatiblen Browser sowie Mikrofonzugriff. Für Zugriff über das Internet ist HTTPS erforderlich.
+ElevenLabs benötigt `ELEVENLABS_API_KEY` und `ELEVENLABS_VOICE_ID`. Ohne diese Werte nutzt der Browser seine eingebaute Sprachausgabe. Die Kreispfeile oben öffnen die Ergebnisse ausgeführter Routinen. Links wählst du eine Routine, rechts kannst du deren Nachrichten ausklappen und einzeln löschen. Frühere Nachrichten ohne eindeutige Zuordnung erscheinen in einer eigenen Gruppe. Spracheingabe nutzt die Web Speech API und benötigt einen kompatiblen Browser sowie Mikrofonzugriff. Für Zugriff über das Internet ist HTTPS erforderlich.
 
 ## MCP
 
@@ -31,9 +31,9 @@ Das Daily Briefing kann mit Playwright aktuelle Webinformationen recherchieren. 
 
 ## Darstellung
 
-Unter **Einstellungen → Darstellung** kannst du Dark Mode oder Light Mode auswählen. Die Hauptfarbe lässt sich mit einer Farbfläche, einem Farbtonregler, RGB-Reglern, dem System-Farbdialog oder einem Hex-Code wählen. Die Vorschau erscheint sofort; **Darstellung speichern** legt die Auswahl auf dem Server ab, damit sie nach einer Anmeldung auf anderen Geräten wieder verfügbar ist.
+Der mit „Einstellungen“ beschriftete Zahnrad-Button oben rechts öffnet Darstellung, KI & Automatik, Sprache, Daily Briefing, Agenten, Routinen, Daten & Verlauf sowie Konto. Unter **Einstellungen → Darstellung** kannst du Dark Mode oder Light Mode auswählen. Die Hauptfarbe lässt sich mit einer Farbfläche, einem Farbtonregler, RGB-Reglern, dem System-Farbdialog oder einem Hex-Code wählen. Die Vorschau erscheint sofort; **Darstellung speichern** legt die Auswahl auf dem Server ab, damit sie nach einer Anmeldung auf anderen Geräten wieder verfügbar ist.
 
-Dort kannst du auch den Chatverlauf unter dem Orb und die ruhige Vollbild-Animation beim Modellwechsel einzeln an- oder ausschalten. Der Chatverlauf wird nur bei aktivierter Anzeige im Browser gespeichert. Jede Nachricht trägt den Namen des Nutzers oder des gewählten KI-Modells beziehungsweise Agenten. KI-Antworten werden für die Sprachausgabe ohne Markdown-Zeichen und Listenmarker ausgegeben.
+Unter **KI & Automatik** lassen sich die beiden Automatiken getrennt einschalten. Unter **Sprache** kannst du das Vorlesen ein- oder ausschalten, das Tempo ändern und die Stimme testen. **Daten & Verlauf** steuert die Anzeige unter dem Orb und bietet Export und Löschen des lokal gespeicherten Chatverlaufs. Die Vollbild-Animation beim Modellwechsel lässt sich unter Darstellung ausschalten. KI-Antworten werden für die Sprachausgabe ohne Markdown-Zeichen und Listenmarker ausgegeben.
 
 ## Vollständige Einrichtung ohne bezahlte Tarife
 

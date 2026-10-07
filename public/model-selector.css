@@ -1,7 +1,9 @@
 .model-selector{position:relative;flex:none;z-index:4;--model-color:var(--accent)}
 #composer{position:relative}
-#composer .model-trigger{width:auto;height:38px;display:flex;align-items:center;gap:7px;padding:0 10px;border:1px solid var(--border);border-radius:11px;background:var(--surface-2);color:var(--text);font-size:12px;font-weight:700;white-space:nowrap;max-width:155px}
-#model-current{overflow:hidden;text-overflow:ellipsis;max-width:85px}
+#composer .model-trigger{width:auto;height:38px;display:flex;align-items:center;gap:7px;padding:0 10px;border:1px solid var(--border);border-radius:11px;background:var(--surface-2);color:var(--text);font-size:12px;font-weight:700;white-space:nowrap;max-width:255px}
+#model-current{overflow:hidden;text-overflow:ellipsis;max-width:75px}
+.model-agent-chip{display:inline-block;max-width:118px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:4px 7px;border-radius:7px;background:color-mix(in srgb,#6BC7B4 13%,transparent);color:#6BC7B4;font-size:11px}
+.model-agent-chip[hidden]{display:none}
 .model-orbit{color:var(--model-color);font-size:17px;line-height:1;text-shadow:0 0 12px var(--model-color)}
 .model-chevron{font-size:13px;color:var(--muted);transition:transform .25s}
 .model-selector.open .model-chevron{transform:rotate(180deg)}
@@ -28,5 +30,5 @@ body.model-summoning #stage::after{content:'';position:absolute;inset:0;pointer-
 @keyframes orbitSummon{0%{transform:rotate(-50deg) scale(.5);opacity:.3}55%{transform:rotate(190deg) scale(1.4)}100%{transform:rotate(360deg) scale(1);opacity:1}}
 @keyframes stageSummon{0%{opacity:0;transform:scale(.72)}40%{opacity:1}100%{opacity:0;transform:scale(1.25)}}
 @keyframes modelInfoIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
-@media(max-width:680px){#composer .model-trigger{padding:0 7px;gap:4px;max-width:100px}#model-current{max-width:49px}.model-menu{left:-9px}.model-chevron{display:none}}
+@media(max-width:680px){#composer .model-trigger{padding:0 7px;gap:4px;max-width:155px}#model-current{max-width:48px}.model-agent-chip{max-width:65px;padding:4px}.model-menu{left:-9px}.model-chevron{display:none}}
 @media(prefers-reduced-motion:reduce){.model-menu,#composer.summoning,#composer.summoning::after,#composer.summoning .model-orbit,body.model-summoning #stage::after{animation:none!important;transition:none!important}}

@@ -29,16 +29,10 @@ if errorlevel 1 (
   )
 )
 
-if exist "%ProgramFiles%\Google\Chrome\Application\chrome.exe" (
-  start "" "%ProgramFiles%\Google\Chrome\Application\chrome.exe" "%JARVIS_URL%"
-  exit /b 0
-)
-if exist "%ProgramFiles(x86)%\Google\Chrome\Application\chrome.exe" (
-  start "" "%ProgramFiles(x86)%\Google\Chrome\Application\chrome.exe" "%JARVIS_URL%"
-  exit /b 0
-)
-if exist "%LocalAppData%\Google\Chrome\Application\chrome.exe" (
-  start "" "%LocalAppData%\Google\Chrome\Application\chrome.exe" "%JARVIS_URL%"
-  exit /b 0
-)
+echo Oeffne Jarvis im Standardbrowser: %JARVIS_URL%
 start "" "%JARVIS_URL%"
+if errorlevel 1 (
+  echo Der Browser konnte nicht automatisch geoeffnet werden. Oeffne %JARVIS_URL% manuell.
+  pause
+  exit /b 1
+)
