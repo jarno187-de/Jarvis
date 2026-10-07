@@ -15,6 +15,8 @@ Die gelieferte Orb-Oberfläche ist mit einem Node-Backend verbunden. Jarvis nutz
 3. `.env.example` nach `.env` kopieren und mindestens `JARVIS_PASSWORD` und `GEMINI_API_KEY` setzen. Den Gemini-Key gibt es in Google AI Studio; ob ein kostenloses Kontingent verfügbar ist, hängt vom aktuellen Tarif und Modell ab.
 4. `npm start` ausführen und `http://localhost:3000` öffnen.
 
+Unter Windows startet `start_local.bat` Jarvis im minimierten CMD-Fenster und öffnet Chrome erst, wenn der Server erreichbar ist. Falls der Start fehlschlägt, bleibt eine Meldung offen; die genaue Ursache steht im Fenster „Jarvis Server“.
+
 ElevenLabs benötigt `ELEVENLABS_API_KEY` und `ELEVENLABS_VOICE_ID`. Ohne diese Werte nutzt der Browser seine eingebaute Sprachausgabe. Die Kreispfeile oben öffnen die Ergebnisse ausgeführter Routinen. Spracheingabe nutzt die Web Speech API und benötigt einen kompatiblen Browser sowie Mikrofonzugriff. Für Zugriff über das Internet ist HTTPS erforderlich.
 
 ## MCP
