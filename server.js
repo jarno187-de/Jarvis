@@ -14,7 +14,7 @@ const password = process.env.JARVIS_PASSWORD || '';
 const secret = crypto.createHash('sha256').update(password + '|jarvis-session-v1').digest();
 const loginAttempts = new Map();
 const file = path.join(root, 'data', 'state.json');
-const initial = {agents:[], routines:[], briefing:{enabled:false,time:'08:00',timezone:'Europe/Berlin',topics:['Wetter','Termine','wichtige Nachrichten'],lastRun:''},notifications:[], pending:[]};
+const initial = {agents:[], routines:[], briefing:{enabled:false,time:'08:00',timezone:'Europe/Berlin',topics:['Wetter','Termine','wichtige Nachrichten'],lastRun:''},appearance:{theme:'dark',accent:'#A78BFA'},notifications:[], pending:[]};
 let state = structuredClone(initial);
 try { state = {...initial,...JSON.parse(await fsp.readFile(file,'utf8'))}; } catch {}
 let saves = Promise.resolve();
@@ -90,7 +90,8 @@ const server=http.createServer(async(req,res)=>{try{
   if(!authed(req))return json(res,401,{error:'Bitte anmelden.'});
   if(req.method!=='GET'&&!originOK(req))return json(res,403,{error:'Origin nicht erlaubt.'});
   if(req.method==='POST'&&route==='/api/logout'){res.setHeader('Set-Cookie','jarvis=; HttpOnly; SameSite=Strict; Path=/; Max-Age=0');return json(res,200,{ok:true});}
-  if(req.method==='GET'&&route==='/api/settings')return json(res,200,{agents:state.agents,routines:state.routines,briefing:state.briefing,notifications:state.notifications,pending:state.pending.map(x=>({id:x.id,name:x.name,args:x.args}))});
+  if(req.method==='GET'&&route==='/api/settings')return json(res,200,{agents:state.agents,routines:state.routines,briefing:state.briefing,appearance:state.appearance||initial.appearance,notifications:state.notifications,pending:state.pending.map(x=>({id:x.id,name:x.name,args:x.args}))});
+  if(req.method==='PUT'&&route==='/api/appearance'){const input=await body(req);if(!['dark','light'].includes(input.theme)||typeof input.accent!=='string'||!/^#[0-9a-fA-F]{6}$/.test(input.accent))return json(res,400,{error:'Ungültiger Anzeigemodus oder Farbcode.'});state.appearance={theme:input.theme,accent:input.accent.toUpperCase()};await save();return json(res,200,{appearance:state.appearance});}
   if(req.method==='POST'&&route==='/api/chat'){const input=await body(req);if(!clean(input.message))return json(res,400,{error:'Nachricht fehlt.'});return json(res,200,{reply:await chat(input.message,Array.isArray(input.history)?input.history:[])});}
   if(req.method==='POST'&&route==='/api/agents'){const input=await body(req);return json(res,200,{agent:await runTool('create_agent',input)});}
   if(req.method==='DELETE'&&route.startsWith('/api/agents/')){state.agents=state.agents.filter(x=>x.id!==route.split('/')[3]);await save();return json(res,200,{ok:true});}

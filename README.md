@@ -20,3 +20,7 @@ ElevenLabs benötigt `ELEVENLABS_API_KEY` und `ELEVENLABS_VOICE_ID`. Ohne diese 
 Auf einem dauerhaft laufenden Node-Host bereitstellen, HTTPS vor den Server schalten und `PUBLIC_ORIGIN=https://deine-domain.example` setzen. `data/` muss als dauerhaftes Volume eingebunden sein. Ohne dauerhaft laufenden Host werden zeitgesteuerte Routinen und Briefings erst nach dem nächsten Start nachgeholt. Ein kostenloser KI-Tarif macht Hosting, ElevenLabs und Buffer nicht automatisch kostenlos. Schlüssel gehören ausschließlich in die Serverumgebung; `.env` und `data/*.json` sind von Git ausgeschlossen.
 
 Das Daily Briefing kann mit Playwright aktuelle Webinformationen recherchieren. Ohne Browser oder andere Datenquelle meldet Jarvis fehlende aktuelle Fakten, statt sie zu erfinden. Es gibt keine garantierten Einnahmen und keine automatische Freigabe für Posts oder andere externe Veröffentlichungen.
+
+## Darstellung
+
+Unter **Einstellungen → Darstellung** kannst du Dark Mode oder Light Mode auswählen. Die Hauptfarbe lässt sich mit einer Farbfläche, einem Farbtonregler, RGB-Reglern, dem System-Farbdialog oder einem Hex-Code wählen. Die Vorschau erscheint sofort; **Darstellung speichern** legt die Auswahl auf dem Server ab, damit sie nach einer Anmeldung auf anderen Geräten wieder verfügbar ist.
