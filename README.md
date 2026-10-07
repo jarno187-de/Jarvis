@@ -13,7 +13,7 @@ ElevenLabs benötigt `ELEVENLABS_API_KEY` und `ELEVENLABS_VOICE_ID`. Ohne diese 
 
 ## MCP
 
-`PLAYWRIGHT_MCP_COMMAND` und `PLAYWRIGHT_MCP_ARGS` starten einen Playwright-MCP-Server als Kindprozess. Die Beispielkonfiguration nutzt `npx` und `@playwright/mcp`. Für Buffer sind `BUFFER_MCP_COMMAND` und `BUFFER_MCP_ARGS` auf den tatsächlich verfügbaren Buffer-MCP-Server zu setzen, einschließlich seiner Authentisierung gemäß dessen Anleitung. Jarvis entdeckt die angebotenen MCP-Werkzeuge dynamisch. Buffer-Werkzeugaufrufe und verändernde Browser-Aktionen erscheinen vor Ausführung als Freigabe in der Oberfläche.
+`PLAYWRIGHT_MCP_COMMAND` und `PLAYWRIGHT_MCP_ARGS` starten einen Playwright-MCP-Server als Kindprozess. Die Beispielkonfiguration nutzt `npx` und `@playwright/mcp`. Für Buffer reicht jetzt `BUFFER_API_KEY`: Jarvis verbindet sich direkt mit Buffers offiziellem MCP-Server unter `https://mcp.buffer.com/mcp`. `BUFFER_MCP_COMMAND` und `BUFFER_MCP_ARGS` sind weiterhin als Alternative für einen lokalen Server verfügbar. Jarvis entdeckt die angebotenen MCP-Werkzeuge dynamisch. Buffer-Werkzeugaufrufe und verändernde Browser-Aktionen erscheinen vor Ausführung als Freigabe in der Oberfläche.
 
 ## Betrieb im Internet
 
@@ -24,3 +24,7 @@ Das Daily Briefing kann mit Playwright aktuelle Webinformationen recherchieren. 
 ## Darstellung
 
 Unter **Einstellungen → Darstellung** kannst du Dark Mode oder Light Mode auswählen. Die Hauptfarbe lässt sich mit einer Farbfläche, einem Farbtonregler, RGB-Reglern, dem System-Farbdialog oder einem Hex-Code wählen. Die Vorschau erscheint sofort; **Darstellung speichern** legt die Auswahl auf dem Server ab, damit sie nach einer Anmeldung auf anderen Geräten wieder verfügbar ist.
+
+## Vollständige Einrichtung ohne bezahlte Tarife
+
+Die ausführliche Schritt-für-Schritt-Anleitung steht in [docs/KOSTENLOS-EINRICHTEN.md](docs/KOSTENLOS-EINRICHTEN.md). Sie nennt die Grenzen der kostenlosen Kontingente ausdrücklich.

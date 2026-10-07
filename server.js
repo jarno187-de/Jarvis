@@ -6,6 +6,7 @@ import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js';
+import { StreamableHTTPClientTransport } from '@modelcontextprotocol/sdk/client/streamableHttp.js';
 
 const root = path.dirname(fileURLToPath(import.meta.url));
 try { process.loadEnvFile(path.join(root, '.env')); } catch {}
@@ -33,6 +34,15 @@ const mcp={};
 async function getMcp(kind){
  if(mcp[kind])return mcp[kind];
  const prefix=kind==='browser'?'PLAYWRIGHT':'BUFFER';
+ if(kind==='buffer'&&process.env.BUFFER_API_KEY){
+  const url=new URL(process.env.BUFFER_MCP_URL||'https://mcp.buffer.com/mcp');
+  if(url.protocol!=='https:')throw Error('BUFFER_MCP_URL muss HTTPS verwenden.');
+  const client=new Client({name:'jarvis',version:'1.0.0'});
+  const transport=new StreamableHTTPClientTransport(url,{requestInit:{headers:{Authorization:`Bearer ${process.env.BUFFER_API_KEY}`}}});
+  await client.connect(transport);
+  const tools=(await client.listTools()).tools;
+  mcp[kind]={client,tools};return mcp[kind];
+ }
  const command=process.env[prefix+'_MCP_COMMAND'];
  if(!command)throw Error(`${kind} MCP ist nicht konfiguriert.`);
  let args=[];try{args=JSON.parse(process.env[prefix+'_MCP_ARGS']||'[]');if(!Array.isArray(args))throw Error();}catch{throw Error(`${prefix}_MCP_ARGS muss ein JSON-Array sein.`);}
@@ -105,4 +115,4 @@ const server=http.createServer(async(req,res)=>{try{
  if(req.method!=='GET')return json(res,405,{error:'Methode nicht erlaubt.'});
  const name=route==='/'?'index.html':decodeURIComponent(route.slice(1));if(name.includes('..')||name.startsWith('.'))return json(res,404,{error:'Nicht gefunden.'});const target=path.join(root,'public',name);if(!target.startsWith(path.join(root,'public')+path.sep))return json(res,404,{error:'Nicht gefunden.'});const content=await fsp.readFile(target);res.writeHead(200,{'Content-Type':mime[path.extname(target)]||'application/octet-stream','Content-Security-Policy':"default-src 'self'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; media-src 'self';",'X-Content-Type-Options':'nosniff'});res.end(content);
  }catch(e){json(res,e.code==='ENOENT'?404:500,{error:err(e)});}});
-server.listen(port,'0.0.0.0',()=>console.log(`Jarvis läuft auf Port ${port}`));
+server.listen(port,process.env.HOST||'0.0.0.0',()=>console.log(`Jarvis läuft auf Port ${port}`));
