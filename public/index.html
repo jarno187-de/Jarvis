@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="/style.css">
 <link rel="stylesheet" href="/model-selector.css">
 <link rel="stylesheet" href="/experience.css">
+<link rel="stylesheet" href="/motion.css">
 </head>
 <body data-s="idle" data-theme="dark">
 <div id="app">
@@ -31,14 +32,14 @@
   <div id="notices" aria-live="polite"></div>
   <main class="workspace">
     <div class="workspace-heading"><span class="eyebrow"><span class="eyebrow-line"></span> DEIN ASSISTENT</span><h1>Was kann ich für dich tun?</h1><p>Frag mich, plane deinen Tag oder lass eine Aufgabe erledigen.</p></div>
-    <div id="stage"><div class="stage-grid" aria-hidden="true"></div><canvas id="orb" aria-label="Jarvis aktivieren" role="button" tabindex="0"></canvas><span class="stage-hint">TIPPEN, UM ZU SPRECHEN</span></div>
+    <div id="stage"><div class="stage-grid" aria-hidden="true"></div><div class="orb-hud" aria-hidden="true"><span class="orb-hud-ring outer"></span><span class="orb-hud-ring inner"></span><span class="orb-hud-axis"></span></div><canvas id="orb" aria-label="Jarvis aktivieren" role="button" tabindex="0"></canvas><span class="stage-hint">TIPPEN, UM ZU SPRECHEN</span></div>
     <div id="text" aria-live="polite"><div id="you"></div><div id="reply"></div><div id="conversation" aria-label="Chatverlauf" hidden></div></div>
     <div class="input-area"><div id="composer"><div class="model-selector" id="model-selector"><button type="button" id="model-trigger" class="model-trigger" aria-label="KI-Modell und Agent auswählen" aria-haspopup="true" aria-expanded="false" aria-controls="model-menu"><span class="model-orbit" aria-hidden="true">✦</span><span id="model-current">Modell</span><span id="agent-current" class="model-agent-chip" hidden></span><span class="model-chevron" aria-hidden="true">⌃</span></button><div id="model-menu" class="model-menu" role="group" aria-label="KI-Modell und Agent" inert><div class="model-menu-heading">ASSISTENTEN WECHSELN</div><div id="model-options"></div></div></div><input id="q" type="text" autocomplete="off" placeholder="Frag Jarvis etwas ..." aria-label="Nachricht"><button id="snd" class="composer-button" title="Sprachausgabe an/aus" aria-label="Sprachausgabe"><svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M17 9a4 4 0 0 1 0 6"/></svg></button><button id="mic" class="composer-button" title="Sprechen" aria-label="Spracheingabe"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button><button id="send" title="Senden" aria-label="Senden"><svg viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button></div><p class="input-hint">Tipp: Du kannst auch auf den Orb tippen oder die Leertaste drücken.</p></div>
   </main>
   <footer class="footer"><span>JARVIS / ASSISTANT SYSTEM</span><span>ENTWICKELT FÜR DEINEN ALLTAG</span></footer>
 </div>
 <aside id="routine-panel" class="routine-panel" aria-label="Ergebnisse deiner Routinen" hidden><div class="routine-panel-head"><div><span class="eyebrow">AUTOMATISIERUNG</span><h2>Deine Routinen</h2></div><button id="routine-close" class="icon-button" aria-label="Routinen-Ergebnisse schließen">✕</button></div><div class="routine-panel-body"><nav id="routine-groups" class="routine-groups" aria-label="Routine auswählen"></nav><div id="routine-results" class="routine-results"></div></div></aside>
-<div id="model-summon" class="model-summon" aria-hidden="true"><div class="summon-halo"></div><div class="summon-ring"></div><div class="summon-core"><span>ASSISTENT AKTIV</span><strong id="summon-name"></strong></div></div>
+<div id="model-summon" class="model-summon" aria-hidden="true"><div class="summon-grid"></div><canvas id="summon-particles"></canvas><div class="summon-halo"></div><div class="summon-ring"></div><div class="summon-arc arc-one"></div><div class="summon-arc arc-two"></div><div class="summon-core"><span>INTELLIGENZ WIRD AKTIVIERT</span><strong id="summon-name"></strong><i class="summon-progress"></i></div></div>
 <div class="overlay" id="login"><div class="login-card"><div class="brand-symbol large" aria-hidden="true"><span></span></div><span class="eyebrow">JARVIS · SICHERER ZUGANG</span><h1>Willkommen zurück.</h1><p>Dein persönlicher Assistent wartet auf dich.</p><form id="login-form"><label for="password">Passwort</label><input id="password" type="password" required autocomplete="current-password" placeholder="Dein Passwort"><p id="login-error" class="form-feedback" role="alert"></p><button class="pill primary full" type="submit">Anmelden <span aria-hidden="true">↗</span></button></form></div></div>
 <div class="overlay" id="settings" hidden><div class="settings-panel" role="dialog" aria-modal="true" aria-labelledby="settings-title">
   <div class="settings-header"><div><span class="eyebrow">KONTROLLZENTRALE</span><h1 id="settings-title">Einstellungen</h1></div><button id="settings-close" class="icon-button" aria-label="Schließen">✕</button></div>
@@ -59,6 +60,7 @@
     </div>
   </div>
 </div></div>
+<script src="/motion.js"></script>
 <script src="/model-selector.js"></script>
 <script src="/app.js"></script>
 </body>

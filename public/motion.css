@@ -1,0 +1,105 @@
+/* Motion system: quiet ambient movement, clear state changes, one cinematic model transition. */
+:root{--motion-ease:cubic-bezier(.16,1,.3,1)}
+
+body.app-ready .topbar{animation:uiArrive .9s var(--motion-ease) both}
+body.app-ready .workspace-heading .eyebrow{animation:uiArrive .9s .08s var(--motion-ease) both}
+body.app-ready .workspace-heading h1{animation:uiArrive 1s .17s var(--motion-ease) both}
+body.app-ready .workspace-heading p{animation:uiArrive 1s .28s var(--motion-ease) both}
+body.app-ready .input-area{animation:uiArrive .9s .48s var(--motion-ease) both}
+body.app-ready .footer{animation:uiArrive .8s .6s var(--motion-ease) both}
+
+.orb-hud{position:absolute;inset:0;pointer-events:none;display:grid;place-items:center;opacity:.62;transition:opacity .65s,filter .65s;filter:drop-shadow(0 0 16px rgb(var(--accent-rgb) / .16))}
+.orb-hud-ring{position:absolute;display:block;width:min(72%,calc(100% - 30px),490px);aspect-ratio:1;border-radius:50%;background:conic-gradient(from 0deg,transparent 0 18deg,rgb(var(--accent-rgb) / .55) 19deg 22deg,transparent 23deg 78deg,rgb(var(--accent-rgb) / .28) 79deg 104deg,transparent 105deg 199deg,rgb(var(--accent-rgb) / .45) 200deg 203deg,transparent 204deg 273deg,rgb(var(--accent-rgb) / .2) 274deg 298deg,transparent 299deg);mask:radial-gradient(circle,transparent 68%,#000 69% 70%,transparent 71%);animation:hudRotate 36s linear infinite}
+.orb-hud-ring.inner{width:min(57%,calc(100% - 70px),375px);opacity:.62;animation-direction:reverse;animation-duration:29s;mask:radial-gradient(circle,transparent 66%,#000 67% 69%,transparent 70%)}
+.orb-hud-axis{width:min(58%,380px);height:1px;background:linear-gradient(90deg,transparent,rgb(var(--accent-rgb) / .16),transparent);transform:rotate(-18deg);animation:hudAxis 9s ease-in-out infinite alternate}
+body[data-theme=light] .orb-hud{opacity:.83;filter:drop-shadow(0 0 14px rgb(var(--accent-rgb) / .25))}
+body[data-s=thinking] .orb-hud,body[data-s=listening] .orb-hud,body[data-s=speaking] .orb-hud{opacity:1;filter:drop-shadow(0 0 26px rgb(var(--accent-rgb) / .4))}
+body[data-s=thinking] .orb-hud-ring.outer{animation-duration:6s}body[data-s=thinking] .orb-hud-ring.inner{animation-duration:8s}
+body[data-s=listening] .orb-hud-ring.outer{animation-duration:14s}body[data-s=speaking] .orb-hud-ring.inner{animation-duration:10s}
+body.model-summoning .orb-hud{opacity:1;filter:drop-shadow(0 0 40px var(--summon-accent,var(--accent)))}
+body.model-summoning .orb-hud-ring.outer{animation-duration:3s}body.model-summoning .orb-hud-ring.inner{animation-duration:4s}
+
+#composer{overflow:visible}
+#composer::before{content:'';position:absolute;inset:-1px;border-radius:inherit;padding:1px;background:linear-gradient(115deg,transparent 10%,rgb(var(--accent-rgb) / .75) 48%,transparent 80%);mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude;opacity:0;transform:translateX(-22%);pointer-events:none}
+#composer:focus-within::before{animation:composerSweep 1.3s var(--motion-ease) both}
+#composer #send{transition:transform .35s var(--motion-ease),box-shadow .35s,background .35s}
+#composer #send:hover{transform:translateY(-2px) rotate(-8deg);box-shadow:0 8px 28px rgb(var(--accent-rgb) / .35)}
+.icon-button{transition:transform .35s var(--motion-ease),background .3s,color .3s,border-color .3s}
+.icon-button:hover{transform:translateY(-2px)}
+.status-pill .dot{transition:transform .5s var(--motion-ease),background .5s,box-shadow .5s}
+body[data-s=thinking] .status-pill .dot{transform:scale(1.4)}
+
+.model-menu{transform:translateY(18px) scale(.94) rotateX(-5deg);transform-origin:bottom left;transition:opacity .26s,transform .5s var(--motion-ease),visibility .26s}
+.model-selector.open .model-menu{transform:translateY(0) scale(1) rotateX(0)}
+.model-selector.open .model-entry{animation:menuItemIn .48s var(--motion-ease) both;animation-delay:calc(var(--row-index,0) * 38ms)}
+.model-row.selected .model-glyph{animation:selectedGlyph 2.4s ease-in-out infinite}
+.model-row{transition:background .24s,transform .3s var(--motion-ease)}.model-row:hover{transform:translateX(3px)}
+
+.overlay:not([hidden]){animation:veilOpen .42s ease-out both}
+.overlay:not([hidden]) .settings-panel,.overlay:not([hidden]) .login-card{animation:dialogOpen .55s var(--motion-ease) both}
+.settings-tab{position:relative;transition:background .3s,color .3s,transform .35s var(--motion-ease)}
+.settings-tab:hover{transform:translateX(4px)}
+.settings-tab.active::before{content:'';position:absolute;left:0;top:22%;bottom:22%;width:2px;background:var(--accent);border-radius:5px;box-shadow:0 0 12px var(--accent);animation:activeRail .4s var(--motion-ease) both}
+.settings-section.active{animation:sectionReveal .45s var(--motion-ease) both}
+.theme-option,.color-picker,.item,.switch-row,.account-card{transition:transform .35s var(--motion-ease),border-color .3s,background .3s,box-shadow .3s}
+.theme-option:hover,.item:hover,.switch-row:hover{transform:translateY(-2px);border-color:rgb(var(--accent-rgb) / .38)}
+.switch::after{transition:transform .42s cubic-bezier(.2,1.5,.35,1),background .3s}
+.pill{transition:transform .35s var(--motion-ease),filter .3s,box-shadow .3s}
+.pill:hover{box-shadow:0 9px 25px rgb(var(--accent-rgb) / .13)}
+.routine-panel{animation:routineDrawer .46s var(--motion-ease)}
+.routine-group.active{animation:groupSelect .4s var(--motion-ease)}
+.routine-result{animation:cardArrive .45s var(--motion-ease) both;animation-delay:calc(var(--card-index,0) * 45ms)}
+.routine-result summary{transition:background .22s,padding .32s var(--motion-ease)}
+.routine-result[open] summary{padding-bottom:11px}
+.routine-result[open] p{animation:sectionReveal .38s var(--motion-ease)}
+.chat-message{animation:chatArrive .5s var(--motion-ease) both}
+
+/* Summoning: the old background pulse becomes a layered grid, arcs, particle burst and core. */
+#model-summon{z-index:9;isolation:isolate;will-change:opacity;--summon-color:var(--accent);background:radial-gradient(ellipse 48% 50% at 50% 50%,color-mix(in srgb,var(--summon-color) 24%,transparent),color-mix(in srgb,var(--bg) 78%,transparent) 68%,transparent 100%)}
+#model-summon.active{animation:energyVeil 2.2s ease-in-out both}
+.summon-grid{position:absolute;inset:-30%;background-image:linear-gradient(color-mix(in srgb,var(--summon-color) 13%,transparent) 1px,transparent 1px),linear-gradient(90deg,color-mix(in srgb,var(--summon-color) 13%,transparent) 1px,transparent 1px);background-size:72px 72px;mask-image:radial-gradient(ellipse 42% 45% at center,#000,transparent);opacity:0;transform:perspective(720px) rotateX(63deg) scale(1.3)}
+#model-summon.active .summon-grid{animation:gridWake 2.2s var(--motion-ease) both}
+#summon-particles{position:absolute;inset:0;width:100%;height:100%;z-index:2}
+#model-summon .summon-halo{z-index:1;top:50%;width:min(80vw,660px);background:radial-gradient(circle,color-mix(in srgb,var(--summon-color) 12%,transparent),transparent 65%)}
+#model-summon.active .summon-halo{animation:energyHalo 2.2s var(--motion-ease) both}
+#model-summon .summon-ring{z-index:3;top:50%;width:min(58vw,480px);border-color:color-mix(in srgb,var(--summon-color) 76%,white);box-shadow:0 0 26px color-mix(in srgb,var(--summon-color) 58%,transparent),inset 0 0 20px color-mix(in srgb,var(--summon-color) 24%,transparent)}
+#model-summon.active .summon-ring{animation:energyRing 2.2s var(--motion-ease) both}
+.summon-arc{position:absolute;left:50%;top:50%;z-index:3;width:min(73vw,610px);aspect-ratio:1;border-radius:50%;border:1px solid transparent;border-top-color:color-mix(in srgb,var(--summon-color) 86%,white);border-right-color:color-mix(in srgb,var(--summon-color) 32%,transparent);transform:translate(-50%,-50%) rotate(-90deg) scale(.55);opacity:0;filter:drop-shadow(0 0 12px var(--summon-color))}
+.summon-arc.arc-two{width:min(44vw,365px);border-top-color:color-mix(in srgb,var(--summon-color) 42%,white);border-right-color:transparent;border-bottom-color:color-mix(in srgb,var(--summon-color) 58%,transparent)}
+#model-summon.active .arc-one{animation:arcOne 2.2s var(--motion-ease) both}
+#model-summon.active .arc-two{animation:arcTwo 2.2s var(--motion-ease) both}
+#model-summon .summon-core{top:50%;z-index:4;min-width:min(410px,86vw);padding:23px 30px 26px;border-radius:20px;background:color-mix(in srgb,var(--bg-raised) 83%,transparent);border:1px solid color-mix(in srgb,var(--summon-color) 49%,var(--border));box-shadow:0 26px 90px rgba(0,0,0,.35),0 0 80px color-mix(in srgb,var(--summon-color) 23%,transparent);backdrop-filter:blur(22px);transform:translate(-50%,-50%) scale(.82)}
+#model-summon.active .summon-core{animation:energyCore 2.2s var(--motion-ease) both}
+.summon-core span{font-size:10px;letter-spacing:.3em}
+.summon-core strong{font-weight:500;line-height:1.05;margin-top:13px}
+.summon-progress{display:block;width:100%;height:2px;margin-top:21px;border-radius:4px;background:color-mix(in srgb,var(--summon-color) 17%,var(--border));overflow:hidden}
+.summon-progress::after{content:'';display:block;width:100%;height:100%;background:linear-gradient(90deg,transparent,var(--summon-color),white);transform:translateX(-105%)}
+#model-summon.active .summon-progress::after{animation:progressCharge 1.55s .28s cubic-bezier(.14,.7,.2,1) both}
+body.model-summoning #composer{border-color:color-mix(in srgb,var(--summon-accent) 70%,var(--border));box-shadow:0 0 0 1px color-mix(in srgb,var(--summon-accent) 20%,transparent),0 0 52px color-mix(in srgb,var(--summon-accent) 24%,transparent);transition:border-color .45s,box-shadow .65s}
+body.model-summoning .workspace-heading{filter:drop-shadow(0 0 18px color-mix(in srgb,var(--summon-accent) 24%,transparent));transition:filter .7s}
+
+@keyframes uiArrive{from{opacity:0;transform:translateY(16px);filter:blur(7px)}to{opacity:1;transform:none;filter:blur(0)}}
+@keyframes hudRotate{to{transform:rotate(360deg)}}
+@keyframes hudAxis{to{transform:rotate(18deg);opacity:.45}}
+@keyframes composerSweep{0%{opacity:0;transform:translateX(-25%)}35%{opacity:1}100%{opacity:0;transform:translateX(25%)}}
+@keyframes menuItemIn{from{opacity:0;transform:translateY(10px);filter:blur(3px)}to{opacity:1;transform:none;filter:blur(0)}}
+@keyframes selectedGlyph{50%{box-shadow:inset 0 0 14px color-mix(in srgb,var(--row-color) 24%,transparent),0 0 14px color-mix(in srgb,var(--row-color) 30%,transparent)}}
+@keyframes veilOpen{from{opacity:0;backdrop-filter:blur(0)}to{opacity:1;backdrop-filter:blur(13px)}}
+@keyframes dialogOpen{from{opacity:0;transform:translateY(28px) scale(.96);filter:blur(9px)}to{opacity:1;transform:none;filter:blur(0)}}
+@keyframes activeRail{from{opacity:0;transform:scaleY(.2)}to{opacity:1;transform:scaleY(1)}}
+@keyframes sectionReveal{from{opacity:0;transform:translateY(12px);filter:blur(4px)}to{opacity:1;transform:none;filter:blur(0)}}
+@keyframes routineDrawer{from{opacity:0;transform:translateY(-14px) scale(.96);filter:blur(6px)}to{opacity:1;transform:none;filter:blur(0)}}
+@keyframes groupSelect{from{background:var(--surface)}to{background:color-mix(in srgb,var(--accent) 10%,var(--surface))}}
+@keyframes cardArrive{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
+@keyframes chatArrive{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}
+@keyframes energyVeil{0%{opacity:0}22%{opacity:1}72%{opacity:1}100%{opacity:0}}
+@keyframes gridWake{0%{opacity:0;transform:perspective(720px) rotateX(63deg) translateY(35px) scale(1.35)}28%{opacity:.9}70%{opacity:.65}100%{opacity:0;transform:perspective(720px) rotateX(63deg) translateY(-18px) scale(1)}}
+@keyframes energyHalo{0%{opacity:0;transform:translate(-50%,-50%) scale(.35)}34%{opacity:1}100%{opacity:0;transform:translate(-50%,-50%) scale(1.28)}}
+@keyframes energyRing{0%{opacity:0;transform:translate(-50%,-50%) scale(.26)}28%{opacity:1}73%{opacity:.72}100%{opacity:0;transform:translate(-50%,-50%) scale(1.4)}}
+@keyframes arcOne{0%{opacity:0;transform:translate(-50%,-50%) rotate(-95deg) scale(.55)}35%{opacity:.85}76%{opacity:.8}100%{opacity:0;transform:translate(-50%,-50%) rotate(120deg) scale(1.15)}}
+@keyframes arcTwo{0%{opacity:0;transform:translate(-50%,-50%) rotate(85deg) scale(.45)}30%{opacity:.75}75%{opacity:.9}100%{opacity:0;transform:translate(-50%,-50%) rotate(-180deg) scale(1.25)}}
+@keyframes energyCore{0%{opacity:0;transform:translate(-50%,-43%) scale(.82);filter:blur(10px)}29%{opacity:1;transform:translate(-50%,-50%) scale(1);filter:blur(0)}74%{opacity:1;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-56%) scale(1.035);filter:blur(4px)}}
+@keyframes progressCharge{to{transform:translateX(105%)}}
+
+@media(max-width:680px){.orb-hud-ring.outer{width:min(92%,350px)}.orb-hud-ring.inner{width:min(74%,280px)}#model-summon .summon-core{padding:19px 22px 22px}#model-summon .summon-core strong{font-size:clamp(22px,7vw,32px)}}
+@media(prefers-reduced-motion:reduce){body.app-ready .topbar,body.app-ready .workspace-heading .eyebrow,body.app-ready .workspace-heading h1,body.app-ready .workspace-heading p,body.app-ready .input-area,body.app-ready .footer,.orb-hud-ring,.orb-hud-axis,#composer:focus-within::before,.model-selector.open .model-entry,.model-row.selected .model-glyph,.overlay:not([hidden]),.overlay:not([hidden]) .settings-panel,.overlay:not([hidden]) .login-card,.settings-section.active,.routine-panel,.routine-group.active,.routine-result,.routine-result[open] p,.chat-message,#model-summon.active,#model-summon.active .summon-grid,#model-summon.active .summon-halo,#model-summon.active .summon-ring,#model-summon.active .summon-arc,#model-summon.active .summon-core,#model-summon.active .summon-progress::after{animation:none!important;filter:none!important}#model-summon.active{opacity:0;visibility:hidden}.orb-hud-ring{opacity:.4}}

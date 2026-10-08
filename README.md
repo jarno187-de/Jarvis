@@ -35,6 +35,8 @@ Der mit „Einstellungen“ beschriftete Zahnrad-Button oben rechts öffnet Dars
 
 Unter **KI & Automatik** lassen sich die beiden Automatiken getrennt einschalten. Unter **Sprache** kannst du das Vorlesen ein- oder ausschalten, das Tempo ändern und die Stimme testen. **Daten & Verlauf** steuert die Anzeige unter dem Orb und bietet Export und Löschen des lokal gespeicherten Chatverlaufs. Die Vollbild-Animation beim Modellwechsel lässt sich unter Darstellung ausschalten. KI-Antworten werden für die Sprachausgabe ohne Markdown-Zeichen und Listenmarker ausgegeben.
 
+Die Oberfläche nutzt abgestimmte Bewegungen für Start, Orb, Modellmenü, Einstellungen, Routinen und Nachrichten. Beim Modellwechsel erscheinen räumliches Raster, rotierende Bögen, Partikel und eine kurze Aktivierungsanzeige. Diese Effekte liegen in `public/motion.css` und `public/motion.js`; bei aktivierter Systemeinstellung für reduzierte Bewegung bleiben die Bewegungen aus.
+
 ## Vollständige Einrichtung ohne bezahlte Tarife
 
 Die ausführliche Schritt-für-Schritt-Anleitung steht in [docs/KOSTENLOS-EINRICHTEN.md](docs/KOSTENLOS-EINRICHTEN.md). Sie nennt die Grenzen der kostenlosen Kontingente ausdrücklich.
